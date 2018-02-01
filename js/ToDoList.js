@@ -30,13 +30,14 @@ notifyTasks();
 //двойной щелчок на названии задачи
 //редактирует ее
 
- addButton.addEventListener('click', addTask);
- /**
-  * addEventListener('keydown', function (ev) {
+addButton.addEventListener('click', addTask);
+
+
+inputTask.addEventListener('keydown', function (ev) {
     if (ev.keyCode == 13) {
         addTask();
     }
-});*/
+});
 
 
 function pressEnter() {
@@ -96,7 +97,7 @@ function editTask() {
     var taskElement = this.parentNode;
     var input = taskElement.querySelector('input');
     var label = taskElement.querySelector('label');
-    var editButton = this;
+    var editButton = taskElement.querySelectorAll('button')[2];
 
     if (!taskElement.classList.contains('editMode')) {
         taskElement.classList.toggle('editMode');
@@ -105,7 +106,14 @@ function editTask() {
         // this.style.display = 'none';
         editButton.innerText = 'save';
 
-        input.onblur = function () {
+        input.onblur = saveInput;
+        input.addEventListener('keydown', function (event) {
+            if (event.keyCode ==13) {
+                saveInput();
+            }
+        })
+
+        function saveInput() {
             label.textContent = input.value;
             editButton.innerText = 'edit';
             taskElement.classList.remove('editMode');
@@ -147,10 +155,12 @@ function bindTaskEvents(listItem) {
     var checkbox = listItem.querySelector('button.checkbox');
     var editButton = listItem.querySelector('button.edit');
     var deleteButton = listItem.querySelector('button.delete');
+    var label = listItem.querySelector('label');
 
     checkbox.onclick = finishTask;
     deleteButton.onclick = deleteTask;
     editButton.addEventListener('click', editTask);
+    label.addEventListener('dblclick', editTask);
 }
 
 function save() {
