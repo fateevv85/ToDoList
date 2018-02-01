@@ -102,6 +102,16 @@ li > input[type="checkbox"] {
   top: 15px;
   transform: scale(1.5); }
 
+.deleteAll {
+  color: indianred; }
+  .deleteAll div {
+    font-weight: 600;
+    font-size: 15px;
+    float: right;
+    margin: 6px 7px 0 0; }
+  .deleteAll button {
+    float: right; }
+
 li > label {
   font-size: 18px;
   line-height: 40px;

@@ -6,6 +6,7 @@ var finishedTasks = document.querySelector('#finished-tasks');
 var noActiveTasks = document.querySelector('#noActiveTasks');
 var noFinishedTasks = document.querySelector('#noFinishedTasks');
 var data = load();
+var deleteAll = document.querySelector('#deleteAll');
 
 for (var i = 0; i < data.unfinishedTasks.length; i++) {
     var listItem = createNewElement(data.unfinishedTasks[i]);
@@ -23,15 +24,29 @@ for (var i = 0; i < data.finishedTasks.length; i++) {
     }
 }
 
+//todo
+//1.delete all tasks button
+//2.confirm for delete task
+
+deleteAll.onclick = deleteAllTasks;
+
+function deleteAllTasks() {
+    var finishedTasks = document.querySelector('#finished-tasks');
+    var numberElements = finishedTasks.children.length;
+    if (confirm('Do you want to remove all tasks?')) {
+        for (var i = numberElements - 1; i >= 0; i--) {
+            finishedTasks.children[i].remove();
+            // console.log(i);
+        }
+    }
+    noFinishedTasks.classList.remove("hidden");
+    document.querySelector('.deleteAll').classList.add('hidden');
+    save();
+}
+
 notifyTasks();
-//toDo
-//кнопка Ентер дожлна отвечать за нажатие определенной
-//кнопки в зависимости от полоения курсора
-//двойной щелчок на названии задачи
-//редактирует ее
 
 addButton.addEventListener('click', addTask);
-
 
 inputTask.addEventListener('keydown', function (ev) {
     if (ev.keyCode == 13) {
@@ -39,18 +54,17 @@ inputTask.addEventListener('keydown', function (ev) {
     }
 });
 
-
-function pressEnter() {
+/**
+ function pressEnter() {
     if (inputTask.focused) {
         console.log('ibput is focused');
     }
-}
+}*/
 
-// document.querySelector('#test').addEventListener('click', save);
-
-function test() {
+/**
+ function test() {
     console.log(inputTask.value);
-}
+}*/
 
 function createNewElement(task) {
     var listItem = document.createElement('li');
@@ -78,6 +92,7 @@ function notifyTasks() {
         noFinishedTasks.classList.remove('hidden');
     } else {
         noFinishedTasks.classList.add('hidden');
+        document.querySelector('.deleteAll').classList.remove('hidden');
     }
 }
 
@@ -103,12 +118,11 @@ function editTask() {
         taskElement.classList.toggle('editMode');
         input.value = label.textContent;
         input.focus();
-        // this.style.display = 'none';
         editButton.innerText = 'save';
 
         input.onblur = saveInput;
         input.addEventListener('keydown', function (event) {
-            if (event.keyCode ==13) {
+            if (event.keyCode == 13) {
                 saveInput();
             }
         })
