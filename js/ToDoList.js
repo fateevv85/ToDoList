@@ -1,5 +1,4 @@
 var addButton = document.querySelector('#add');
-// console.log(addButton);
 var inputTask = document.querySelector('#new-task');
 var unfinishedTasks = document.querySelector('#unfinished-tasks');
 var finishedTasks = document.querySelector('#finished-tasks');
@@ -30,25 +29,24 @@ notifyTasks();
 
 addButton.addEventListener('click', addTask);
 
+inputTask.addEventListener('keydown', function (ev) {
+    if (ev.keyCode == 13) {
+        addTask();
+    }
+});
+
 function deleteAllTasks() {
     var finishedTasks = document.querySelector('#finished-tasks');
     var numberElements = finishedTasks.children.length;
     if (confirm('Do you want to remove all tasks?')) {
         for (var i = numberElements - 1; i >= 0; i--) {
             finishedTasks.children[i].remove();
-            // console.log(i);
         }
     }
     noFinishedTasks.classList.remove("hidden");
     document.querySelector('.deleteAll').classList.add('hidden');
     save();
 }
-
-inputTask.addEventListener('keydown', function (ev) {
-    if (ev.keyCode == 13) {
-        addTask();
-    }
-});
 
 function createNewElement(task) {
     var listItem = document.createElement('li');
@@ -96,10 +94,11 @@ function addTask() {
     }
 
     if (!inputTask.value) {
-        return alert('Insert task name!');
+        return alert('Input task name!');
     }
 
     var listItem = createNewElement(inputTask.value);
+
     unfinishedTasks.insertBefore(listItem, unfinishedTasks.firstChild);
     bindTaskEvents(listItem);
     inputTask.value = '';
@@ -179,6 +178,7 @@ function bindTaskEvents(listItem) {
 function save() {
     var unfinishedTasksArr = [];
     var finishedTasksArr = [];
+
     for (var i = 0; i < unfinishedTasks.children.length; i++) {
         unfinishedTasksArr[i] = unfinishedTasks.children[i].children[1].innerText;
     }
@@ -199,6 +199,7 @@ function load() {
 
 function buttonElementTask(action) {
     var button = document.createElement('button');
+
     button.classList.add('material-icons');
 
     if (action == 'checkbox') {
@@ -215,6 +216,3 @@ function buttonElementTask(action) {
     }
     return button;
 }
-
-
-
