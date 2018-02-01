@@ -19,9 +19,10 @@ ul {
   margin: 5px 0;
   padding: 0; }
 
+/*
 .checkbox {
-  float: left; }
-
+  float: left;
+}*/
 li * {
   float: left; }
 
@@ -38,9 +39,7 @@ button {
   color: #888;
   font-size: 15px;
   font-family: sans-serif;
-  cursor: pointer;
-  float: right;
-  margin: 8px auto; }
+  cursor: pointer; }
 
 button:hover {
   color: black; }
@@ -92,7 +91,10 @@ p > button:hover {
 
 li {
   overflow: hidden;
-  border-bottom: 1px solid #eee; }
+  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between; }
 
 li > input[type="checkbox"] {
   margin: 0 10px;
@@ -103,11 +105,11 @@ li > input[type="checkbox"] {
 li > label {
   font-size: 18px;
   line-height: 40px;
-  width: 237px;
-  padding: 1px 0 0 11px; }
+  flex-grow: 1;
+  padding: 1px 0 0 20px; }
 
 li > input[type="text"] {
-  width: 457px;
+  flex-grow: 1;
   height: 17px; }
 
 li > .delete:hover {
@@ -125,6 +127,9 @@ li > .delete:hover {
 
 .notify {
   color: indianred; }
+
+.delete {
+  order: 5; }
 
 #finished-tasks button {
   color: lightgray; }
