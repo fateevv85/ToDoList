@@ -24,10 +24,11 @@ for (var i = 0; i < data.finishedTasks.length; i++) {
     }
 }
 
-//todo
-//message if this task exist already
-
 deleteAll.onclick = deleteAllTasks;
+
+notifyTasks();
+
+addButton.addEventListener('click', addTask);
 
 function deleteAllTasks() {
     var finishedTasks = document.querySelector('#finished-tasks');
@@ -43,27 +44,11 @@ function deleteAllTasks() {
     save();
 }
 
-notifyTasks();
-
-addButton.addEventListener('click', addTask);
-
 inputTask.addEventListener('keydown', function (ev) {
     if (ev.keyCode == 13) {
         addTask();
     }
 });
-
-/**
- function pressEnter() {
-    if (inputTask.focused) {
-        console.log('ibput is focused');
-    }
-}*/
-
-/**
- function test() {
-    console.log(inputTask.value);
-}*/
 
 function createNewElement(task) {
     var listItem = document.createElement('li');
@@ -96,9 +81,24 @@ function notifyTasks() {
 }
 
 function addTask() {
+    for (var i = 0; i < unfinishedTasks.children.length; i++) {
+        if (unfinishedTasks.children[i].querySelector('label').innerText == inputTask.value) {
+            // alert('Task is exist already!');
+
+            unfinishedTasks.children[i].classList.add('matchingValue');
+
+            setTimeout(function () {
+                unfinishedTasks.children[i].classList.remove('matchingValue');
+            }, 2000);
+
+            return alert('Task is exist already!');
+        }
+    }
+
     if (!inputTask.value) {
         return alert('Insert task name!');
     }
+
     var listItem = createNewElement(inputTask.value);
     unfinishedTasks.insertBefore(listItem, unfinishedTasks.firstChild);
     bindTaskEvents(listItem);

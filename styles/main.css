@@ -168,4 +168,7 @@ button.checkbox {
     float: right;
     color: lightgray; }
 
+.matchingValue {
+  background-color: indianred; }
+
 /*# sourceMappingURL=main.css.map */
