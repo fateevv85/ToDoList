@@ -102,16 +102,6 @@ li > input[type="checkbox"] {
   top: 15px;
   transform: scale(1.5); }
 
-.deleteAll {
-  color: indianred; }
-  .deleteAll div {
-    font-weight: 600;
-    font-size: 15px;
-    float: right;
-    margin: 6px 7px 0 0; }
-  .deleteAll button {
-    float: right; }
-
 li > label {
   font-size: 18px;
   line-height: 40px;
@@ -143,6 +133,8 @@ li > .delete:hover {
 
 #finished-tasks button {
   color: lightgray; }
+  #finished-tasks button:hover {
+    color: indianred; }
 
 ul li input[type=text] {
   display: none; }
@@ -155,5 +147,25 @@ ul li.editMode label {
 
 button.checkbox {
   float: left; }
+
+#deleteAll {
+  cursor: pointer;
+  overflow: hidden;
+  float: right; }
+  #deleteAll:hover {
+    color: indianred; }
+    #deleteAll:hover button {
+      color: indianred; }
+
+.deleteAll {
+  color: lightgray; }
+  .deleteAll div {
+    font-weight: 600;
+    font-size: 15px;
+    float: right;
+    margin: 6px 7px 0 0; }
+  .deleteAll button.deleteAll {
+    float: right;
+    color: lightgray; }
 
 /*# sourceMappingURL=main.css.map */

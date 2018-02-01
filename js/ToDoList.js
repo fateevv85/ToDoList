@@ -25,8 +25,7 @@ for (var i = 0; i < data.finishedTasks.length; i++) {
 }
 
 //todo
-//1.delete all tasks button
-//2.confirm for delete task
+//message if this task exist already
 
 deleteAll.onclick = deleteAllTasks;
 
