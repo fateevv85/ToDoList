@@ -82,14 +82,17 @@ function addTask() {
     for (var i = 0; i < unfinishedTasks.children.length; i++) {
         if (unfinishedTasks.children[i].querySelector('label').innerText == inputTask.value) {
             // alert('Task is exist already!');
-
             unfinishedTasks.children[i].classList.add('matchingValue');
+            unfinishedTasks.children[i].scrollIntoView({block:'end', behavior: "smooth"});
 
             setTimeout(function () {
                 unfinishedTasks.children[i].classList.remove('matchingValue');
-            }, 2000);
+                document.querySelector('#start').scrollIntoView({block: 'start', behavior: 'smooth'});
+            }, 1000);
 
-            return alert('Task is exist already!');
+            //todo
+            //message about already existing task
+            return console.log('aaaa');
         }
     }
 
